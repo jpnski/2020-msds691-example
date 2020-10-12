@@ -105,6 +105,11 @@ SELECT * FROM works_in;
 ------------------------------------------------------------
 DELETE FROM works_in WHERE did = 2;
 SELECT * FROM works_in;
+DELETE FROM departments WHERE did = 1; -- Won't work without ON DELETE CASCADE
+ALTER TABLE works_in DROP CONSTRAINT works_in_did_fkey;
+ALTER TABLE works_in ADD CONSTRAINT works_in_did_fkey FOREIGN KEY (did) REFERENCES departments (did) ON UPDATE CASCADE ON DELETE CASCADE;
+DELETE FROM departments WHERE did = 1; 
+SELECT * FROM works_in;
 
 
 DROP TABLE employees CASCADE;
