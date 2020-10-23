@@ -22,7 +22,7 @@ CREATE TABLE cars(
     UNIQUE (year, county_name, vehicle_type, tonnage)
 );
 
-COPY cars FROM '/Users/dwoodbridge/Class/2020_MSDS691/Data/Iowa_Cars.csv' CSV HEADER;
+COPY cars FROM '/home/jacek/usf/module2/msds691/2020_MSDS691-example/Data/Iowa_Cars.csv' CSV HEADER;
 
 ------------------------------------------------------------
 -- Ex 2. 
