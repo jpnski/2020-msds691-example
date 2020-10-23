@@ -5,21 +5,21 @@
 DROP TABLE IF EXISTS cars;
 
 CREATE TABLE cars(
-	year int
-, year_ending date
-, county_name varchar(20)
-, county_code int
-, feature_id int
-, motorvehicle varchar(3)
-, vehicle_cat varchar(15)
-, vehicle_type varchar(45)
-, tonnage varchar(30)
-, registrations int
-, annual_fee real
-, primary_county_lat real
-, primary_county_long real
-, primary_county_cord varchar(45),
-UNIQUE (year, county_name, vehicle_type, tonnage)
+	year int, 
+    year_ending date,
+    county_name varchar(20),
+    county_code int,
+    feature_id int,
+    motorvehicle varchar(3),
+    vehicle_cat varchar(15),
+    vehicle_type varchar(45),
+    tonnage varchar(30),
+    registrations int,
+    annual_fee real,
+    primary_county_lat real,
+    primary_county_long real,
+    primary_county_cord varchar(45),
+    UNIQUE (year, county_name, vehicle_type, tonnage)
 );
 
 COPY cars FROM '/Users/dwoodbridge/Class/2020_MSDS691/Data/Iowa_Cars.csv' CSV HEADER;
@@ -46,13 +46,9 @@ SELECT DISTINCT year, vehicle_type FROM cars;
 -- Ex 3. 
 ------------------------------------------------------------
 -- A. Return all the records for “Semi Trailer” vehicles in the cars table. (Duplicate allowed)
-SELECT *
-FROM cars
-WHERE vehicle_type = 'Semi Trailer';
+SELECT * FROM cars WHERE vehicle_type = 'Semi Trailer';
 
-SELECT *
-FROM cars
-WHERE vehicle_type = 'SEMI TRAILER';
+SELECT * FROM cars WHERE vehicle_type = 'SEMI TRAILER';
 
 -- B. Return all the records with more than 10000 registered vehicles in the cars table. (Duplicate allowed)
 SELECT * FROM cars WHERE registrations > 10000;
@@ -73,18 +69,15 @@ AND county_name = 'Wright';
 -- Ex 5. 
 ------------------------------------------------------------
 -- A. Return top 5 records with the largest annual_fee.
-SELECT *
-FROM cars
+SELECT * FROM cars
 WHERE cars.annual_fee IS NOT NULL
 ORDER BY cars.annual_fee DESC
 LIMIT 5;
 
 -- B. Return the last 5 years in the table.
-SELECT DISTINCT year
-FROM cars
+SELECT DISTINCT year FROM cars
 ORDER BY year DESC
 LIMIT 5;
-
 
 ------------------------------------------------------------
 -- Ex 6. 
@@ -120,42 +113,35 @@ SELECT NULL OR False;
 -- Ex 7.
 ------------------------------------------------------------
 -- A. Return all the records ordered by annual_fee when annual_fee is known.
-SELECT *
-FROM cars
+SELECT * FROM cars
 WHERE cars.annual_fee IS NOT NULL
 ORDER BY cars.annual_fee;
 
 -- Ascending
-SELECT *
-FROM cars
+SELECT * FROM cars
 WHERE cars.annual_fee IS NOT NULL
 ORDER BY cars.annual_fee ASC;
 
 -- Descending
-SELECT *
-FROM cars
+SELECT * FROM cars
 WHERE cars.annual_fee IS NOT NULL
 ORDER BY cars.annual_fee DESC;
 
 -- B. Return all the records ordered by annual_fee (largest first), and then registration (largest first) when annual_fee is known.
-SELECT *
-FROM cars
+SELECT * FROM cars
 WHERE annual_fee IS NOT NULL
 ORDER BY annual_fee DESC, registrations DESC;
 
-SELECT annual_fee, registrations
-FROM cars
+SELECT annual_fee, registrations FROM cars
 WHERE annual_fee IS NOT NULL
 ORDER BY 1 DESC, 2 DESC;
 
-SELECT annual_fee, registrations
-FROM cars
+SELECT annual_fee, registrations FROM cars
 WHERE annual_fee IS NOT NULL
 ORDER BY annual_fee DESC, registrations DESC;
 
 -- C. Find year, registrations, annual_fee for the records for more than 217,000 registrations and annual_fee is known. 
-SELECT year, registrations, annual_fee
-FROM cars
+SELECT year, registrations, annual_fee FROM cars
 WHERE registrations > 217000 AND annual_fee IS NOT NULL;
 
 ------------------------------------------------------------
@@ -177,8 +163,7 @@ WHERE RIGHT(tonnage,4)='Tons'
 ORDER BY year, country_name;
 
 -- B. Find vehicle types that include a keyword, “truck” (case-insensitive).
-SELECT DISTINCT vehicle_type
-FROM cars
+SELECT DISTINCT vehicle_type FROM cars
 WHERE LOWER(vehicle_type) LIKE ('%truck%')
 
 ------------------------------------------------------------
@@ -205,16 +190,13 @@ ORDER BY year_starting;
 ------------------------------------------------------------
 -- Ex 12. Find vehicle types that includes “Truck” but does not include “Tractor”.
 ------------------------------------------------------------
-SELECT  DISTINCT vehicle_type
-FROM cars
+SELECT  DISTINCT vehicle_type FROM cars
 WHERE LOWER(vehicle_type) LIKE ('%truck%')
 EXCEPT
-SELECT  DISTINCT vehicle_type
-FROM cars
+SELECT  DISTINCT vehicle_type FROM cars
 WHERE LOWER(vehicle_type) LIKE ('%tractor%');
 
-SELECT DISTINCT vehicle_type
-FROM cars
+SELECT DISTINCT vehicle_type FROM cars
 WHERE LOWER(vehicle_type) LIKE ('%truck%') AND LOWER(vehicle_type) NOT LIKE ('%tractor%');
 
 ------------------------------------------------------------
@@ -227,13 +209,9 @@ FROM cars
 WHERE vehicle_type IN ('Motor Home - A', 'Motor Home - B', 'Motor Home - C', 'Travel Trailer')
 ORDER BY county_name ASC, registrations DESC;
 
-SELECT *
-FROM  cars
+SELECT * FROM  cars
 WHERE registrations >= ALL (SELECT registrations FROM cars);
 
 -- B. Return all the column values for the row that has the most registration.
-SELECT *
-FROM cars
+SELECT * FROM cars
 WHERE EXISTS (SELECT *))
-
-
