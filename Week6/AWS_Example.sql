@@ -24,7 +24,9 @@ SELECT aws_commons.create_s3_uri(
 --https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL.Procedural.Importing.html#USER_PostgreSQL.S3Import.FileFormats
 SELECT aws_s3.table_import_from_s3(
    'employees', 'eid,name,title, ssn', '(FORMAT csv, HEADER true)',
-   aws_commons.create_s3_uri('msds691', 'employees.csv','us-west-2')
+   aws_commons.create_s3_uri('msds691', 'employees.csv','us-west-2'),
+ aws_commons.create_aws_credentials('AKIAVOINCV3G4PT63EYV','o5mXQcoRoz0Mojyijvgou9mXJNYVJ0GQyr1OeTOo','')
+
 );
 
 
